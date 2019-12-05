@@ -27,6 +27,8 @@ public class Produto implements Serializable{
 	private BigDecimal quantidade;
 	
 	private BigDecimal valor;
+	
+	private boolean ativo;
 
 	public long getId() {
 		return id;
@@ -58,6 +60,14 @@ public class Produto implements Serializable{
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }
