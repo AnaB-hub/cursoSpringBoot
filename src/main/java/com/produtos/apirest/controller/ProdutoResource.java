@@ -45,11 +45,11 @@ public class ProdutoResource {
 		return produtoRepository.save(produto);
 	}
 	
-	//Delete apresentado (exclui recebendo o objeto)
-//	@DeleteMapping("/produto")
-//	public void deletaProduto(@RequestBody Produto produto) {
-//		produtoRepository.delete(produto);;
-//	}
+	//Delete apresentado (excluir recebendo o objeto)
+	@DeleteMapping("/produto")
+	public void deletaProduto(@RequestBody Produto produto) {
+		produtoRepository.delete(produto);;
+	}
 	
 	//Exclusão pelo Id
 	@DeleteMapping("/produto/{id}")
