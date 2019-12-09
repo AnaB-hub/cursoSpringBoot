@@ -18,6 +18,7 @@ import com.produtos.apirest.models.Cliente;
 import com.produtos.apirest.repository.ClienteRepository;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value="/api")
@@ -29,37 +30,50 @@ public class ClienteResource {
 	ClienteRepository clienteRepository;
 	
 	@GetMapping("/clientes")
+	@ApiOperation(value="Lista de Clientes")
 	public List<Cliente> clientes() {
 		return clienteRepository.findAll();
 	}
 	
 	@GetMapping("/clientesAtivos")
+	@ApiOperation(value="Lista de Clientes ativos")
 	public Stream<Cliente> clientesAtivos() {
 		return clienteRepository.findAll().stream().filter(c -> c.isAtivo() == true);
 	}
 	
 	@GetMapping("/cliente/{id}")
+	@ApiOperation(value="Lista de Clientes")
 	public Cliente cliente(@PathVariable(value="id") int id) {
 		return this.clienteRepository.findById(id);
 	}
 	
 	@PostMapping("/cliente")
+	@ApiOperation(value="Cadastro de Clientes")
 	public Cliente saveCliente(@RequestBody Cliente cliente) {
 		cliente.setAtivo(true);
 		return clienteRepository.save(cliente);
 	}
 	
 	@PutMapping("/cliente")
+	@ApiOperation(value="Alteração de Clientes")
 	public Cliente updateCliente(@RequestBody Cliente cliente) {
 		return clienteRepository.save(cliente);
 	}
 	
+	@DeleteMapping("/cliente")
+	@ApiOperation(value="Alteração de Clientes")
+	public void excluirCliente(@RequestBody Cliente cliente) {
+		this.clienteRepository.delete(cliente);
+	}
+	
 	@DeleteMapping("/cliente/excluir/{id}")
+	@ApiOperation(value="Exclusão física de Cliente por ID")
 	public void deleteCliente(@PathVariable(value="id") int id) {
 		clienteRepository.deleteById(id);
 	}
 	
 	@GetMapping("/cliente/excluir/{id}")
+	@ApiOperation(value="Exclusão lógica de Cliente por ID")
 	public Cliente deleteLogicCliente(@PathVariable(value="id") int id) {
 		Cliente cliente = clienteRepository.findById(id);
 		cliente.setAtivo(false);
