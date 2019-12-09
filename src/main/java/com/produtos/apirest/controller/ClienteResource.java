@@ -38,7 +38,7 @@ public class ClienteResource {
 		return clienteRepository.findAll().stream().filter(c -> c.isAtivo() == true);
 	}
 	
-	@GetMapping("cliente/{id}")
+	@GetMapping("/cliente/{id}")
 	public Cliente cliente(@PathVariable(value="id") int id) {
 		return this.clienteRepository.findById(id);
 	}
