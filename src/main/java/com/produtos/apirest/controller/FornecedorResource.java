@@ -76,5 +76,11 @@ public class FornecedorResource {
 	public void deleteFornecedorPorObjeto(@RequestBody Fornecedor fornecedor) {
 		this.fornecedorRepository.delete(fornecedor);
 	}
+	
+	@GetMapping("/fornecedor/{id}")
+	@ApiOperation(value="Retorna Fornecedor único")
+	public Fornecedor Fornecedor(@PathVariable(value = "id") int id) {
+		return this.fornecedorRepository.findById(id);
+	}
 
 }
