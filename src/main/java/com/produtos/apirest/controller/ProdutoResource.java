@@ -1,5 +1,7 @@
 package com.produtos.apirest.controller;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -39,6 +41,7 @@ public class ProdutoResource {
 	@ApiOperation(value="Retorna uma lista de produtos ativos")
 	public Stream<Produto> produtosAtivos() {
 		List<Produto> produtos = produtoRepository.findAll();
+		Collections.sort(produtos, Comparator.comparing(Produto::getNome));
 		return produtos.stream().filter(p -> p.isAtivo() == true);
 	}
 	

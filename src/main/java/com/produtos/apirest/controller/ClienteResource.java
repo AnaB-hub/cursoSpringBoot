@@ -1,5 +1,7 @@
 package com.produtos.apirest.controller;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.produtos.apirest.models.Cliente;
+import com.produtos.apirest.models.Produto;
 import com.produtos.apirest.repository.ClienteRepository;
 
 import io.swagger.annotations.Api;
@@ -38,7 +41,9 @@ public class ClienteResource {
 	@GetMapping("/clientesAtivos")
 	@ApiOperation(value="Lista de Clientes ativos")
 	public Stream<Cliente> clientesAtivos() {
-		return clienteRepository.findAll().stream().filter(c -> c.isAtivo() == true);
+		List<Cliente> clientes = clienteRepository.findAll();
+        Collections.sort(clientes, Comparator.comparing(Cliente::getNome));
+		return clientes.stream().filter(c -> c.isAtivo() == true);
 	}
 	
 	@GetMapping("/cliente/{id}")
